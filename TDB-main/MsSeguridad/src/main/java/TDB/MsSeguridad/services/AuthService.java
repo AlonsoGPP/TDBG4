@@ -20,4 +20,8 @@ public class AuthService {
     }
     public Optional<UsuarioModel> getById(int id){ return  authRepository.findById(id);}
 
+    public void deleteById(int id){
+        authRepository.deleteById(id);
+    }
+
 }
