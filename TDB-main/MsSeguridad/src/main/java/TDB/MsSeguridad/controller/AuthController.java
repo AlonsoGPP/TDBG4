@@ -42,4 +42,10 @@ public class AuthController {
       UsuarioModel newUser= authService.crearUsuario(user);
           return new ResponseEntity<>(user, HttpStatus.CREATED);
       }
-    }
+      
+      //by Neil
+      @PutMapping("/actualizar/{id}")
+      public ResponseEntity<UsuarioModel> actualizarUsuario(@PathVariable int id, @RequestBody UsuarioModel user){
+          UsuarioModel uptUser = authService.actualizarUsuario(user , id);
+          return new ResponseEntity<>(uptUser, HttpStatus.OK);
+      }

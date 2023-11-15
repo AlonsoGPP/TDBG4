@@ -27,5 +27,17 @@ public class AuthService {
     public UsuarioModel crearUsuario(UsuarioModel user){
         return authRepository.save(user);
     }
-//actualizar
+//actualizar by Neil
+
+public UsuarioModel actualizarUsuario(UsuarioModel user , int id){
+    if(user.getIdUsuario()==0){
+        user.setIdUsuario(id);
+    }
+    if(authRepository.existsById(id)){
+        return authRepository.save(user);
+    }else{
+        return null;
+    }
+}
+
 }
