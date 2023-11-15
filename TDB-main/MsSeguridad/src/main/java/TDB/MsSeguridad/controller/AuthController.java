@@ -17,7 +17,7 @@ import TDB.MsSeguridad.services.AuthService;
 import TDB.MsSeguridad.model.UsuarioModel;
 
 @RestController
-@RequestMapping("/api/auth/")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -37,4 +37,9 @@ public class AuthController {
         authService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-}
+      @PostMapping("/crear")
+      public ResponseEntity<UsuarioModel> crearUsuario(@RequestBody UsuarioModel user) {
+      UsuarioModel newUser= authService.crearUsuario(user);
+          return new ResponseEntity<>(user, HttpStatus.CREATED);
+      }
+    }

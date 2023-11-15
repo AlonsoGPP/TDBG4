@@ -24,4 +24,8 @@ public class AuthService {
         authRepository.deleteById(id);
     }
 
+    public UsuarioModel crearUsuario(UsuarioModel user){
+        return authRepository.save(user);
+    }
+
 }
