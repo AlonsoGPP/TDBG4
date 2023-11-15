@@ -27,5 +27,5 @@ public class AuthService {
     public UsuarioModel crearUsuario(UsuarioModel user){
         return authRepository.save(user);
     }
-
+//actualizar
 }
