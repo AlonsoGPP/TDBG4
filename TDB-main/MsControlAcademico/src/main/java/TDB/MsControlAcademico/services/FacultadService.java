@@ -44,7 +44,8 @@ public class FacultadService implements FacultadServiceInterface {
           facultadRepository.delete(mo);
       }
     }
-    public FacultadDTO updaupdateFacultad(int id, FacultadDTO facultadDTO){
+    @Override
+    public FacultadDTO updateFacultad(int id, FacultadDTO facultadDTO){
         FacultadModel facultadModel=FacultadMapper.mapper.facultadDTOtoFacultad(facultadDTO);
         if(facultadRepository.existsById(id)){
             FacultadModel response=facultadRepository.save(facultadModel);
