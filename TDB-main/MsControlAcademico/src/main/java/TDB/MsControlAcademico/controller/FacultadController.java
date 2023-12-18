@@ -1,4 +1,5 @@
 package TDB.MsControlAcademico.controller;
+import TDB.MsControlAcademico.components.MessageProvider;
 import TDB.MsControlAcademico.dtos.FacultadDTO;
 import TDB.MsControlAcademico.model.FacultadModel;
 import TDB.MsControlAcademico.services.FacultadService;
@@ -15,13 +16,15 @@ public class FacultadController {
     @Autowired
     FacultadService facultadService;
 
+    @Autowired
+    MessageProvider messageProvider;
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(facultadService.obtenerTodasLasFacultades());
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
     }
 
@@ -30,7 +33,7 @@ public class FacultadController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(facultadService.obtenerFacultadPorId(id));
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
     }
 
@@ -39,7 +42,7 @@ public class FacultadController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(facultadService.guardarFacultad(facultadDTO));
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
 
@@ -49,7 +52,7 @@ public class FacultadController {
         FacultadDTO response=facultadService.updateFacultad(id, facultadDTO);
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }catch(Exception e){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
     }
     }
 
@@ -57,9 +60,9 @@ public class FacultadController {
     public ResponseEntity<?> delete(@PathVariable int id){
         try {
             facultadService.eliminarFacultad(id);
-            return  ResponseEntity.status(HttpStatus.OK).body("{\"Msg\":\"Eliminado con exito.\"}");
+            return  ResponseEntity.status(HttpStatus.OK).body(messageProvider.getSuccesfullyDeletedMessage());
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
 

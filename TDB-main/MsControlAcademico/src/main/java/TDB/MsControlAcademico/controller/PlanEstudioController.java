@@ -1,5 +1,6 @@
 package TDB.MsControlAcademico.controller;
 
+import TDB.MsControlAcademico.components.MessageProvider;
 import TDB.MsControlAcademico.dtos.CarreraDTO;
 import TDB.MsControlAcademico.dtos.PlanEstudioDTO;
 import TDB.MsControlAcademico.services.PlanEstudioService;
@@ -14,13 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class PlanEstudioController {
     @Autowired
     PlanEstudioService planEstudioService;
+    @Autowired
+    MessageProvider messageProvider;
+
 
     @PostMapping("")
     public ResponseEntity<?> createOne(@RequestBody PlanEstudioDTO planEstudioDTO){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(planEstudioService.crearPlanEstudio(planEstudioDTO));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
     @GetMapping("")
@@ -28,7 +32,7 @@ public class PlanEstudioController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(planEstudioService.obtenerPlanesEstudio());
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
     }
 
@@ -37,7 +41,7 @@ public class PlanEstudioController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(planEstudioService.obtenerPlanEstudioPorId(id));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
 
     }
@@ -48,7 +52,7 @@ public class PlanEstudioController {
             PlanEstudioDTO response=planEstudioService.updatePlanEstudio(planEstudioDTO);
             return  ResponseEntity.status(HttpStatus.OK).body(response);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
 
     }
@@ -56,9 +60,9 @@ public class PlanEstudioController {
     public ResponseEntity<?> delete(@PathVariable int id){
         try {
             planEstudioService.eliminarPlanEstudio(id);
-            return  ResponseEntity.status(HttpStatus.OK).body("{\"Msg\":\"Eliminado con exito.\"}");
+            return  ResponseEntity.status(HttpStatus.OK).body(messageProvider.getSuccesfullyDeletedMessage());
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
 

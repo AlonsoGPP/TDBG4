@@ -27,7 +27,7 @@ public class CursoModel {
     private String descripcion;
 
     @Column(name = "id_plan_estudio")
-    private Integer id_plan_estudio=0;
+    private Integer id_plan_estudio;
 
     @Column(name = "CREATED_AT")
     private Date CREATED_AT;

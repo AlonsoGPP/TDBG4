@@ -5,8 +5,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface CursoMapper {
-    CursoMapper mapper= Mappers.getMapper(CursoMapper.class);
+public interface CursosMapper {
+    CursosMapper mapper= Mappers.getMapper(CursosMapper.class);
 
     CursoDTO cursoToCursoDTO(CursoModel cursoModel);
     CursoModel cursoDTOToCurso(CursoDTO cursoDTO);

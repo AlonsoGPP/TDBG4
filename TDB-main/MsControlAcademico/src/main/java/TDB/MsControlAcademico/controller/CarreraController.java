@@ -1,5 +1,6 @@
 package TDB.MsControlAcademico.controller;
 
+import TDB.MsControlAcademico.components.MessageProvider;
 import TDB.MsControlAcademico.dtos.CarreraDTO;
 import TDB.MsControlAcademico.services.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,15 @@ import org.springframework.web.bind.annotation.*;
 public class CarreraController {
     @Autowired
     CarreraService carreraService;
+    @Autowired
+    MessageProvider messageProvider;
 
     @PostMapping("")
     public ResponseEntity<?> createOne(@RequestBody CarreraDTO carreraDTO){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(carreraService.crearCarrera(carreraDTO));
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
 
@@ -29,7 +32,7 @@ public class CarreraController {
             return ResponseEntity.status(HttpStatus.OK).body(carreraService.obtenerTodasLasCarreras());
         }catch (Exception e){
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
 
         }
     }
@@ -39,7 +42,7 @@ public class CarreraController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(carreraService.obtenerCarreraPorId(id));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
 
     }
@@ -50,7 +53,7 @@ public class CarreraController {
             CarreraDTO response=carreraService.updateCarrera(carreraDTO);
             return  ResponseEntity.status(HttpStatus.OK).body(response);
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageProvider.getGenericErrorMessage());
         }
 
     }
@@ -58,9 +61,9 @@ public class CarreraController {
     public ResponseEntity<?> delete(@PathVariable int id){
         try {
             carreraService.eliminarCarrera(id);
-            return  ResponseEntity.status(HttpStatus.OK).body("{\"Msg\":\"Eliminado con exito.\"}");
+            return  ResponseEntity.status(HttpStatus.OK).body(messageProvider.getSuccesfullyDeletedMessage());
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageProvider.getGenericErrorMessage());
         }
     }
 }
