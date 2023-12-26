@@ -1,8 +1,13 @@
 package TDB.MsSeguridad.services;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+import TDB.MsSeguridad.dtos.UserMapper;
+import TDB.MsSeguridad.dtos.UserRequest;
+import TDB.MsSeguridad.dtos.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,29 +20,61 @@ public class AuthService {
     @Autowired
     IAuthRepository authRepository;
 
-    public List<UsuarioModel> getAll() {
-        return (List<UsuarioModel>) authRepository.findAll();
-    }
-    public Optional<UsuarioModel> getById(int id){ return  authRepository.findById(id);}
+    public List<UserResponse> getAll() {
+        List<UsuarioModel> usuarios= (List<UsuarioModel>) authRepository.findAll();
+        List<UserResponse> userResponses=usuarios.stream().map(
+                usuario-> UserMapper.mapper1.userToUserResponse(usuario)).collect(Collectors.toList()); ////
 
-    public void deleteById(int id){
-        authRepository.deleteById(id);
+
+        return userResponses;
+    }
+    public UserResponse getById(int id){
+
+          UsuarioModel usuarioModel=authRepository.findById(id).orElse(null);//
+          return UserMapper.mapper1.userToUserResponse(usuarioModel);
     }
 
-    public UsuarioModel crearUsuario(UsuarioModel user){
-        return authRepository.save(user);
+    public boolean deleteById(int id){
+        try {
+            UsuarioModel mo=authRepository.findById(id).orElseThrow();//
+            authRepository.delete(mo);
+            return true;
+        }catch (Exception e ){
+            return false;
+        }
+
+    }
+
+    public UserResponse crearUsuario(UserRequest user){
+        UsuarioModel usuarioModel= UserMapper.mapper1.userRequestToUser(user);
+            usuarioModel.setCreatedAt(getCurrentDate());
+        return UserMapper.mapper1.userToUserResponse(authRepository.save(usuarioModel));//
     }
 //actualizar by Neil
 
-public UsuarioModel actualizarUsuario(UsuarioModel user , int id){
-    if(user.getIdUsuario()==0){
-        user.setIdUsuario(id);
+public UserResponse actualizarUsuario(UserRequest userRQ){
+    UsuarioModel user=UserMapper.mapper1.userRequestToUser(userRQ);
+    user.setUpdatedAt(getCurrentDate());
+
+    UsuarioModel tmpUser=authRepository.findById(user.getIdUsuario()).orElse(null);
+    if(tmpUser!=null){
+        if(user.getUsername()==null){
+            user.setUsername(tmpUser.getUsername());
+        }
+        if(user.getPassword()==null){
+        user.setPassword(tmpUser.getPassword());
+        }
+        user.setCreatedAt(tmpUser.getCreatedAt());
+        return UserMapper.mapper1.userToUserResponse(authRepository.save(user));
     }
-    if(authRepository.existsById(id)){
-        return authRepository.save(user);
-    }else{
-        return null;
-    }
+
+
+    return null;
 }
 
+    public Date getCurrentDate(){
+        return  java.util.Date
+                .from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault())
+                        .toInstant());
+    }
 }

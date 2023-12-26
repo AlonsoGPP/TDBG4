@@ -3,14 +3,12 @@ package TDB.MsSeguridad.controller;
 import java.util.List;
 import java.util.Optional;
 
+import TDB.MsSeguridad.dtos.UserRequest;
+import TDB.MsSeguridad.dtos.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import TDB.MsSeguridad.services.AuthService;
 
@@ -24,28 +22,50 @@ public class AuthController {
     AuthService authService;
 
     @GetMapping("/getallusers")
-    public List<UsuarioModel> getAll() {
-        return authService.getAll();
+    public ResponseEntity<?> getAll() {
+       try{
+        return ResponseEntity.status(HttpStatus.OK).body(authService.getAll());
+       }catch(Exception e){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erorr inesperado");
+       }
     }
     @GetMapping("/finduserbyid/{id}")
-    public Optional<UsuarioModel> getById(@PathVariable int id){
-        return authService.getById(id);
+    public ResponseEntity<?> getById(@PathVariable int id){
+        return ResponseEntity.status(HttpStatus.OK).body(authService.getById(id));
     }
 
     @DeleteMapping("/eliminar/{id}")
-      public ResponseEntity<UsuarioModel> deleteById(@PathVariable int id){
-        authService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+      public ResponseEntity<?> deleteById(@PathVariable int id){
+        if(authService.deleteById(id)){
+            return ResponseEntity.status(HttpStatus.OK).body("Borrado correcto");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erorr no se encontro el usuario");
+        }
+
       }
       @PostMapping("/crear")
-      public ResponseEntity<UsuarioModel> crearUsuario(@RequestBody UsuarioModel user) {
-      UsuarioModel newUser= authService.crearUsuario(user);
-          return new ResponseEntity<>(user, HttpStatus.CREATED);
+      public ResponseEntity<?> crearUsuario(@RequestBody UserRequest user) {
+
+      try {
+
+         return ResponseEntity.status(HttpStatus.CREATED).body(authService.crearUsuario(user));
+
+      }catch(Exception e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+      }
       }
       
       //by Neil
-      @PutMapping("/actualizar/{id}")
-      public ResponseEntity<UsuarioModel> actualizarUsuario(@PathVariable int id, @RequestBody UsuarioModel user){
-          UsuarioModel uptUser = authService.actualizarUsuario(user , id);
-          return new ResponseEntity<>(uptUser, HttpStatus.OK);
+      @PutMapping("/actualizar")
+      public ResponseEntity<?> actualizarUsuario( @RequestBody UserRequest user){
+         try {
+             UserResponse userR=authService.actualizarUsuario(user);
+             if(userR!=null){
+             return  ResponseEntity.status(HttpStatus.OK).body(userR);
+             }else{
+                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error No se encontro el usuario");
+             }
+         }catch (Exception e){
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");}
       }
+}
