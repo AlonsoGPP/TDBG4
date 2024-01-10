@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UserMapper {
-    UserMapper mapper1 = Mappers.getMapper(UserMapper.class);
+    UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     UserResponse userToUserResponse(UsuarioModel usuarioModel);
 

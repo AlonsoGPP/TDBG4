@@ -21,20 +21,20 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-    @GetMapping("/getallusers")
+    @GetMapping("/users")
     public ResponseEntity<?> getAll() {
        try{
         return ResponseEntity.status(HttpStatus.OK).body(authService.getAll());
        }catch(Exception e){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erorr inesperado");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erorr inesperado" + e);
        }
     }
-    @GetMapping("/finduserbyid/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<?> getById(@PathVariable int id){
         return ResponseEntity.status(HttpStatus.OK).body(authService.getById(id));
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/users/{id}")
       public ResponseEntity<?> deleteById(@PathVariable int id){
         if(authService.deleteById(id)){
             return ResponseEntity.status(HttpStatus.OK).body("Borrado correcto");

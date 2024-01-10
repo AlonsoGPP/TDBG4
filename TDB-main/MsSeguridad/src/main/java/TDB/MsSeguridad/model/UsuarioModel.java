@@ -30,7 +30,7 @@ public class UsuarioModel {
     @Column(name="createdAt")
     public Date createdAt;
 
-    @Column(name = "updtedAt")
+    @Column(name = "updatedAt")
     public Date updatedAt;
     public int getIdUsuario() {
         return idUsuario;

@@ -23,7 +23,7 @@ public class AuthService {
     public List<UserResponse> getAll() {
         List<UsuarioModel> usuarios= (List<UsuarioModel>) authRepository.findAll();
         List<UserResponse> userResponses=usuarios.stream().map(
-                usuario-> UserMapper.mapper1.userToUserResponse(usuario)).collect(Collectors.toList()); ////
+                usuario-> UserMapper.mapper.userToUserResponse(usuario)).collect(Collectors.toList()); ////
 
 
         return userResponses;
@@ -31,7 +31,7 @@ public class AuthService {
     public UserResponse getById(int id){
 
           UsuarioModel usuarioModel=authRepository.findById(id).orElse(null);//
-          return UserMapper.mapper1.userToUserResponse(usuarioModel);
+          return UserMapper.mapper.userToUserResponse(usuarioModel);
     }
 
     public boolean deleteById(int id){
@@ -46,14 +46,14 @@ public class AuthService {
     }
 
     public UserResponse crearUsuario(UserRequest user){
-        UsuarioModel usuarioModel= UserMapper.mapper1.userRequestToUser(user);
+        UsuarioModel usuarioModel= UserMapper.mapper.userRequestToUser(user);
             usuarioModel.setCreatedAt(getCurrentDate());
-        return UserMapper.mapper1.userToUserResponse(authRepository.save(usuarioModel));//
+        return UserMapper.mapper.userToUserResponse(authRepository.save(usuarioModel));//
     }
 //actualizar by Neil
 
 public UserResponse actualizarUsuario(UserRequest userRQ){
-    UsuarioModel user=UserMapper.mapper1.userRequestToUser(userRQ);
+    UsuarioModel user=UserMapper.mapper.userRequestToUser(userRQ);
     user.setUpdatedAt(getCurrentDate());
 
     UsuarioModel tmpUser=authRepository.findById(user.getIdUsuario()).orElse(null);
@@ -65,7 +65,8 @@ public UserResponse actualizarUsuario(UserRequest userRQ){
         user.setPassword(tmpUser.getPassword());
         }
         user.setCreatedAt(tmpUser.getCreatedAt());
-        return UserMapper.mapper1.userToUserResponse(authRepository.save(user));
+        user.setUpdatedAt(getCurrentDate());
+        return UserMapper.mapper.userToUserResponse(authRepository.save(user));
     }
 
 
