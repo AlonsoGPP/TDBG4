@@ -2,8 +2,6 @@ package TDB.MsControlAcademico.services;
 
 import TDB.MsControlAcademico.dtos.CarreraDTO;
 import TDB.MsControlAcademico.dtos.CarrerasMapper;
-import TDB.MsControlAcademico.dtos.FacultadDTO;
-import TDB.MsControlAcademico.dtos.FacultadMapper;
 import TDB.MsControlAcademico.interfaces.CarreraServiceInterface;
 import TDB.MsControlAcademico.model.CarreraModel;
 import TDB.MsControlAcademico.repository.CarreraRepository;
@@ -20,21 +18,21 @@ public class CarreraService implements CarreraServiceInterface {
     CarreraRepository carreraRepository;
     @Override
     public CarreraDTO crearCarrera(CarreraDTO carreraDTO) {
-        CarreraModel carreraModel= CarrerasMapper.mapper.carreraDTOToCarreraModel(carreraDTO);
-        return CarrerasMapper.mapper.carreraToCarreraDTO(carreraRepository.save(carreraModel));
+        CarreraModel carreraModel= CarrerasMapper.mapper1.carreraDTOToCarreraModel(carreraDTO);
+        return CarrerasMapper.mapper1.carreraToCarreraDTO(carreraRepository.save(carreraModel));
     }
 
     @Override
     public CarreraDTO obtenerCarreraPorId(int id) {
        CarreraModel carreraModel= carreraRepository.findById(id).orElse(null);
-        return CarrerasMapper.mapper.carreraToCarreraDTO(carreraModel);
+        return CarrerasMapper.mapper1.carreraToCarreraDTO(carreraModel);
     }
 
     @Override
     public List<CarreraDTO> obtenerTodasLasCarreras() {
         List<CarreraModel> carreras= (List<CarreraModel>) carreraRepository.findAll();
         List<CarreraDTO> carrerasDTO=carreras.stream().map(
-                carrera -> CarrerasMapper.mapper.carreraToCarreraDTO(carrera)).collect(Collectors.toList());
+                carrera -> CarrerasMapper.mapper1.carreraToCarreraDTO(carrera)).collect(Collectors.toList());
         return carrerasDTO;
     }
 
@@ -48,9 +46,9 @@ public class CarreraService implements CarreraServiceInterface {
 
     @Override
     public CarreraDTO updateCarrera( CarreraDTO carreraDTO) {
-        CarreraModel carreraModel = CarrerasMapper.mapper.carreraDTOToCarreraModel(carreraDTO);
-        if(carreraRepository.existsById(carreraDTO.getCod_carrera())){
-            return CarrerasMapper.mapper.carreraToCarreraDTO(carreraRepository.save(carreraModel));
+        CarreraModel carreraModel = CarrerasMapper.mapper1.carreraDTOToCarreraModel(carreraDTO);
+        if(carreraRepository.existsById(carreraDTO.getCodCarrera())){
+            return CarrerasMapper.mapper1.carreraToCarreraDTO(carreraRepository.save(carreraModel));
         }
         return null;
     }

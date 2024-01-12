@@ -2,12 +2,10 @@ package TDB.MsSeguridad.services;
 
 import TDB.MsSeguridad.dtos.*;
 import TDB.MsSeguridad.model.EstudianteModel;
-import TDB.MsSeguridad.model.UsuarioModel;
 import TDB.MsSeguridad.repository.IEstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -20,20 +18,20 @@ public class EstudianteService {
 
     public List<EstudianteResponse> getAll(){
         List<EstudianteModel> estudiantes= (List<EstudianteModel>) estudianteRepository.findAll();
-        List<EstudianteResponse> estudianteResponse=estudiantes.stream().map(estudante-> EstudianteMapper.mapper1.estudianteToEstudianteResponse(estudante)).collect(Collectors.toList());
+        List<EstudianteResponse> estudianteResponse=estudiantes.stream().map(estudante-> EstudianteMapper.mapper.estudianteToEstudianteResponse(estudante)).collect(Collectors.toList());
         return estudianteResponse;
     }
 
     public EstudianteResponse createEstudiante(EstudianteRequest estudianteRequest){
-        EstudianteModel estudianteModel=EstudianteMapper.mapper1.estudianteRequestToEstudianteModel(estudianteRequest);
+        EstudianteModel estudianteModel=EstudianteMapper.mapper.estudianteRequestToEstudianteModel(estudianteRequest);
         estudianteModel.setCreatedAt(getCurrentDate());
-        return EstudianteMapper.mapper1.estudianteToEstudianteResponse(estudianteRepository.save(estudianteModel));
+        return EstudianteMapper.mapper.estudianteToEstudianteResponse(estudianteRepository.save(estudianteModel));
 
     }
     public EstudianteResponse getById(String id){
 
         EstudianteModel mo=estudianteRepository.findById(id).orElse(null);//
-        return EstudianteMapper.mapper1.estudianteToEstudianteResponse(mo);
+        return EstudianteMapper.mapper.estudianteToEstudianteResponse(mo);
     }
     public boolean deleteById(String id){
         try {
@@ -46,7 +44,7 @@ public class EstudianteService {
 
     }
     public EstudianteResponse actualizarEstudiante(EstudianteRequest est)  {
-        EstudianteModel estudianteMoUp=EstudianteMapper.mapper1.estudianteRequestToEstudianteModel(est);
+        EstudianteModel estudianteMoUp=EstudianteMapper.mapper.estudianteRequestToEstudianteModel(est);
 
         EstudianteModel tmpObj=estudianteRepository.findById(estudianteMoUp.getCodEstudiante()).orElse(null);
         if(tmpObj!=null){
@@ -55,6 +53,9 @@ public class EstudianteService {
             }
             if(estudianteMoUp.getApellido()!=null){
                 tmpObj.setApellido(estudianteMoUp.getApellido());
+            }
+            if(estudianteMoUp.getDni()!=null){
+                tmpObj.setDni(estudianteMoUp.getDni());
             }
             if(estudianteMoUp.getEmail()!=null){
                 tmpObj.setEmail(estudianteMoUp.getEmail());
@@ -67,12 +68,11 @@ public class EstudianteService {
             }
           tmpObj.setUpdatedAt(getCurrentDate());
 
-            return EstudianteMapper.mapper1.estudianteToEstudianteResponse(estudianteRepository.save(tmpObj));
+            return EstudianteMapper.mapper.estudianteToEstudianteResponse(estudianteRepository.save(tmpObj));
         }
 
 
         return null;
-
     }
     public Date getCurrentDate(){
         return  java.util.Date

@@ -1,21 +1,19 @@
 package TDB.MsControlAcademico.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "facultad")
 public class FacultadModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_facultad;
+    @Column(name="id_facultad")
+    private int idFacultad;
 
-
+    @Column(name="nombre", nullable=false)
     private String nombre;
-
+    @Column(name="descripcion")
     private String descripcion;
 
     // Constructores, getters y setters
@@ -32,11 +30,11 @@ public class FacultadModel {
 
     // Getters y setters
     public int getIdFacultad() {
-        return id_facultad;
+        return idFacultad;
     }
 
     public void setIdFacultad(int idFacultad) {
-        this.id_facultad = idFacultad;
+        this.idFacultad = idFacultad;
     }
 
     public String getNombre() {

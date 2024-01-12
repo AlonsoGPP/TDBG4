@@ -20,22 +20,22 @@ public class CursoService implements CursoServiceInterface {
 
     @Override
     public CursoDTO crearCurso(CursoDTO cursoDTO) {
-        CursoModel cursoModel= CursosMapper.mapper.cursoDTOToCurso(cursoDTO);
+        CursoModel cursoModel= CursosMapper.mapper1.cursoDTOToCurso(cursoDTO);
         cursoModel.setCREATED_AT(getCurrentDate());
-        return CursosMapper.mapper.cursoToCursoDTO(cursoRepository.save(cursoModel));
+        return CursosMapper.mapper1.cursoToCursoDTO(cursoRepository.save(cursoModel));
     }
 
     @Override
     public CursoDTO obtenerCursoPorId(String cod) {
       CursoModel cursoModel=cursoRepository.findById(cod).orElse(null);
-      return CursosMapper.mapper.cursoToCursoDTO(cursoModel);
+      return CursosMapper.mapper1.cursoToCursoDTO(cursoModel);
     }
 
     @Override
     public List<CursoDTO> obtenerTodosLosCursos() {
         List<CursoModel> cursos= (List<CursoModel>) cursoRepository.findAll();
         List<CursoDTO> cursosDTOS=cursos.stream().map(
-                curso -> CursosMapper.mapper.cursoToCursoDTO(curso)).collect(Collectors.toList());
+                curso -> CursosMapper.mapper1.cursoToCursoDTO(curso)).collect(Collectors.toList());
         return cursosDTOS;
     }
 
@@ -49,10 +49,10 @@ public class CursoService implements CursoServiceInterface {
 
     @Override
     public CursoDTO updateCurso(CursoDTO cursoDTO) {
-        CursoModel cursoModel = CursosMapper.mapper.cursoDTOToCurso(cursoDTO);
+        CursoModel cursoModel = CursosMapper.mapper1.cursoDTOToCurso(cursoDTO);
         cursoModel.setUPDATED_AT(getCurrentDate());
-        if(cursoRepository.existsById(cursoDTO.getCod_curso())){
-            return CursosMapper.mapper.cursoToCursoDTO(cursoRepository.save(cursoModel));
+        if(cursoRepository.existsById(cursoDTO.getCodCurso())){
+            return CursosMapper.mapper1.cursoToCursoDTO(cursoRepository.save(cursoModel));
         }
         return null;
     }

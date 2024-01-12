@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface CarrerasMapper {
-    CarrerasMapper mapper= Mappers.getMapper(CarrerasMapper.class);
+    CarrerasMapper mapper1 = Mappers.getMapper(CarrerasMapper.class);
 
     CarreraDTO carreraToCarreraDTO(CarreraModel carreraModel);
 

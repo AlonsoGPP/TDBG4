@@ -17,7 +17,7 @@ public class FacultadService implements FacultadServiceInterface {
     FacultadRepository facultadRepository;
     @Override
     public FacultadModel guardarFacultad(FacultadDTO facultadDTO) {
-        FacultadModel facultadModel=FacultadMapper.mapper.facultadDTOtoFacultad(facultadDTO);
+        FacultadModel facultadModel=FacultadMapper.mapper1.facultadDTOtoFacultad(facultadDTO);
         return facultadRepository.save(facultadModel);
     }
 
@@ -25,14 +25,14 @@ public class FacultadService implements FacultadServiceInterface {
     @Override
     public FacultadDTO obtenerFacultadPorId(int id) {
         FacultadModel facultad= facultadRepository.findById(id).orElse(null);
-        return FacultadMapper.mapper.facultadToFacultadDTO(facultad);
+        return FacultadMapper.mapper1.facultadToFacultadDTO(facultad);
     }
 
     @Override
     public List<FacultadDTO>  obtenerTodasLasFacultades() {
         List<FacultadModel> facultades = (List<FacultadModel>) facultadRepository.findAll();
         List<FacultadDTO> facultadesDTOS=facultades.stream().map(
-                facultad -> FacultadMapper.mapper.facultadToFacultadDTO(facultad)).collect(Collectors.toList());
+                facultad -> FacultadMapper.mapper1.facultadToFacultadDTO(facultad)).collect(Collectors.toList());
 
         return facultadesDTOS;
     }
@@ -46,10 +46,10 @@ public class FacultadService implements FacultadServiceInterface {
     }
     @Override
     public FacultadDTO updateFacultad(int id, FacultadDTO facultadDTO){
-        FacultadModel facultadModel=FacultadMapper.mapper.facultadDTOtoFacultad(facultadDTO);
+        FacultadModel facultadModel=FacultadMapper.mapper1.facultadDTOtoFacultad(facultadDTO);
         if(facultadRepository.existsById(id)){
             FacultadModel response=facultadRepository.save(facultadModel);
-            return FacultadMapper.mapper.facultadToFacultadDTO(response);
+            return FacultadMapper.mapper1.facultadToFacultadDTO(response);
         }else{
             return null;
         }

@@ -18,6 +18,8 @@ public class EstudianteModel {
     @Column(name="apellido", nullable = false)
     private String apellido;
 
+    @Column(name="dni", nullable = false)
+    private String dni;
     @Column(name="fecha_nacimiento")
     private Date fechaNacimiento;
 
@@ -35,10 +37,11 @@ public class EstudianteModel {
     public EstudianteModel() {
     }
 
-    public EstudianteModel(String codEstudiante, String nombre, String apellido, Date fechaNacimiento, String email, Date createdAt, Date updatedAt, UsuarioModel user) {
+    public EstudianteModel(String codEstudiante, String nombre, String apellido, String dni, Date fechaNacimiento, String email, Date createdAt, Date updatedAt, UsuarioModel user) {
         this.codEstudiante = codEstudiante;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.createdAt = createdAt;
@@ -108,5 +111,13 @@ public class EstudianteModel {
 
     public void setUser(UsuarioModel user) {
         this.user = user;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

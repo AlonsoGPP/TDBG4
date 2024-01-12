@@ -7,6 +7,7 @@ public class DocenteRequest {
     private String nombre;
     private String apellido;
     private String dni;
+    private String correo;
     private String formacion;
     private String telefono;
     private boolean activo;
@@ -14,15 +15,16 @@ public class DocenteRequest {
     public DocenteRequest() {
     }
 
-    public DocenteRequest(String codDocente, String nombre, String apellido, String dni, String formacion, String telefono, boolean activo, UsuarioModel user) {
+    public DocenteRequest(String codDocente, String nombre, String apellido, String dni, String correo, String formacion, String telefono, boolean activo, UsuarioModel user) {
         this.codDocente = codDocente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.correo = correo;
         this.formacion = formacion;
         this.telefono = telefono;
         this.activo = activo;
-        this.user=user;
+        this.user = user;
     }
 
     public String getCodDocente() {
@@ -87,5 +89,13 @@ public class DocenteRequest {
 
     public void setUser(UsuarioModel user) {
         this.user = user;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

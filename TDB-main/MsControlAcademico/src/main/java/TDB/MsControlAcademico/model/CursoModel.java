@@ -9,7 +9,7 @@ import java.util.Date;
 public class CursoModel {
     @Id
     @Column(name = "cod_curso", length = 30, nullable = false)
-    private String cod_curso;
+    private String codCurso;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -21,13 +21,13 @@ public class CursoModel {
     private int ciclo;
 
     @Column(name = "total_sesiones", nullable = false)
-    private int total_sesiones;
+    private int totalSesiones;
 
     @Column(name = "descripcion", length = 255)
     private String descripcion;
 
     @Column(name = "id_plan_estudio")
-    private Integer id_plan_estudio;
+    private Integer idPlanEstudio;
 
     @Column(name = "CREATED_AT")
     private Date CREATED_AT;
@@ -40,25 +40,25 @@ public class CursoModel {
 
     // Constructor con campos
     public CursoModel(String codCurso, String nombre, int creditos, int ciclo, int totalSesiones, String descripcion, int idPlanEstudio, Date createdAt, Date updatedAt) {
-        this.cod_curso = codCurso;
+        this.codCurso = codCurso;
         this.nombre = nombre;
         this.creditos = creditos;
         this.ciclo = ciclo;
-        this.total_sesiones = totalSesiones;
+        this.totalSesiones = totalSesiones;
         this.descripcion = descripcion;
-        this.id_plan_estudio = idPlanEstudio;
+        this.idPlanEstudio = idPlanEstudio;
         this.CREATED_AT = createdAt;
         this.UPDATED_AT = updatedAt;
 
 
     }
 
-    public String getCod_curso() {
-        return cod_curso;
+    public String getCodCurso() {
+        return codCurso;
     }
 
-    public void setCod_curso(String cod_curso) {
-        this.cod_curso = cod_curso;
+    public void setCodCurso(String codCurso) {
+        this.codCurso = codCurso;
     }
 
     public String getNombre() {
@@ -85,12 +85,12 @@ public class CursoModel {
         this.ciclo = ciclo;
     }
 
-    public int getTotal_sesiones() {
-        return total_sesiones;
+    public int getTotalSesiones() {
+        return totalSesiones;
     }
 
-    public void setTotal_sesiones(int total_sesiones) {
-        this.total_sesiones = total_sesiones;
+    public void setTotalSesiones(int totalSesiones) {
+        this.totalSesiones = totalSesiones;
     }
 
     public String getDescripcion() {
@@ -101,13 +101,13 @@ public class CursoModel {
         this.descripcion = descripcion;
     }
 
-    public Integer getId_plan_estudio() {
-        return id_plan_estudio;
+    public Integer getIdPlanEstudio() {
+        return idPlanEstudio;
     }
 
-    public void setId_plan_estudio(Integer id_plan_estudio) {
+    public void setIdPlanEstudio(Integer idPlanEstudio) {
 
-        this.id_plan_estudio = id_plan_estudio;
+        this.idPlanEstudio = idPlanEstudio;
     }
 
     public Date getCREATED_AT() {

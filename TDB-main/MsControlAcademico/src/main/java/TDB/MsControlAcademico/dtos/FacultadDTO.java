@@ -1,16 +1,16 @@
 package TDB.MsControlAcademico.dtos;
 
 public class FacultadDTO {
-    private int id_facultad;
+    private int idFacultad;
     private String nombre;
     private String descripcion;
 
-    public int getId_facultad() {
-        return id_facultad;
+    public int getIdFacultad() {
+        return idFacultad;
     }
 
-    public void setId_facultad(int id_facultad) {
-        this.id_facultad = id_facultad;
+    public void setIdFacultad(int idFacultad) {
+        this.idFacultad = idFacultad;
     }
 
     public String getNombre() {

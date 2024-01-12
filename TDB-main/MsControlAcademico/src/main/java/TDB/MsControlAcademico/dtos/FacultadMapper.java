@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface FacultadMapper {
-    FacultadMapper mapper= Mappers.getMapper(FacultadMapper.class);
+    FacultadMapper mapper1 = Mappers.getMapper(FacultadMapper.class);
     FacultadDTO facultadToFacultadDTO(FacultadModel facultadModel);
 
     FacultadModel facultadDTOtoFacultad(FacultadDTO facultadDTO);

@@ -8,6 +8,7 @@ public class EstudianteRequest {
     private String codEstudiante;
     private String nombre;
     private String apellido;
+    private String dni;
     private Date fechaNacimiento;
     private String email;
     private UsuarioModel user;
@@ -15,13 +16,14 @@ public class EstudianteRequest {
     public EstudianteRequest() {
     }
 
-    public EstudianteRequest(String codEstudiante, String nombre, String apellido, Date fechaNacimiento, String email, UsuarioModel id_user) {
+    public EstudianteRequest(String codEstudiante, String nombre, String apellido, String dni, Date fechaNacimiento, String email, UsuarioModel user) {
         this.codEstudiante = codEstudiante;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
-        this.user = id_user;
+        this.user = user;
     }
 
     public String getCodEstudiante() {
@@ -70,5 +72,13 @@ public class EstudianteRequest {
 
     public void setUser(UsuarioModel user) {
         this.user = user;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface CursosMapper {
-    CursosMapper mapper= Mappers.getMapper(CursosMapper.class);
+    CursosMapper mapper1 = Mappers.getMapper(CursosMapper.class);
 
     CursoDTO cursoToCursoDTO(CursoModel cursoModel);
     CursoModel cursoDTOToCurso(CursoDTO cursoDTO);

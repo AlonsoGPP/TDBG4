@@ -25,6 +25,8 @@ public class DocenteModel {
 
     @Column(name="telefono", nullable = true)
     private String telefono;
+    @Column(name="email", nullable = true)
+    private String email;
 
     @Column(name="activo", nullable = false)
     private boolean activo;
@@ -37,17 +39,18 @@ public class DocenteModel {
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
     UsuarioModel user;
-
+//falta agregar correo y a estudiante falta agregar dni
     public DocenteModel() {
     }
 
-    public DocenteModel(String codDocente, String nombre, String apellido, String dni, String formacion, String telefono, boolean activo, Date createdAt, Date updatedAt, UsuarioModel user) {
+    public DocenteModel(String codDocente, String nombre, String apellido, String dni, String formacion, String telefono, String email, boolean activo, Date createdAt, Date updatedAt, UsuarioModel user) {
         this.codDocente = codDocente;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.formacion = formacion;
         this.telefono = telefono;
+        this.email = email;
         this.activo = activo;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -132,5 +135,13 @@ public class DocenteModel {
 
     public void setUser(UsuarioModel user) {
         this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

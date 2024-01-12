@@ -12,7 +12,7 @@ public class EstudianteResponse
     private String apellido;
     private Date fechaNacimiento;
     private String email;
-
+    private String dni;
     public Date createdAt;
 
 
@@ -22,12 +22,13 @@ public class EstudianteResponse
     public EstudianteResponse() {
     }
 
-    public EstudianteResponse(String codEstudiante, String nombre, String apellido, Date fechaNacimiento, String email, Date createdAt, Date updatedAt, UsuarioModel user) {
+    public EstudianteResponse(String codEstudiante, String nombre, String apellido, Date fechaNacimiento, String email, String dni, Date createdAt, Date updatedAt, UsuarioModel user) {
         this.codEstudiante = codEstudiante;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
+        this.dni = dni;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.user = user;
@@ -95,5 +96,13 @@ public class EstudianteResponse
 
     public void setUser(UsuarioModel user) {
         this.user = user;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }

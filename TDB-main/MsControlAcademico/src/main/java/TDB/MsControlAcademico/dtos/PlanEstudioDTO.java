@@ -1,18 +1,18 @@
 package TDB.MsControlAcademico.dtos;
 
 public class PlanEstudioDTO {
-    private int id_plan_estudio;
+    private int idPlanEstudio;
     private String año;
-    private int cant_creditos;
+    private int cantCreditos;
 
-    private int cod_carrera;
+    private int codCarrera;
 
-    public int getId_plan_estudio() {
-        return id_plan_estudio;
+    public int getIdPlanEstudio() {
+        return idPlanEstudio;
     }
 
-    public void setId_plan_estudio(int id_plan_estudio) {
-        this.id_plan_estudio = id_plan_estudio;
+    public void setIdPlanEstudio(int idPlanEstudio) {
+        this.idPlanEstudio = idPlanEstudio;
     }
 
     public String getAño() {
@@ -23,19 +23,19 @@ public class PlanEstudioDTO {
         this.año = año;
     }
 
-    public int getCant_creditos() {
-        return cant_creditos;
+    public int getCantCreditos() {
+        return cantCreditos;
     }
 
-    public void setCant_creditos(int cant_creditos) {
-        this.cant_creditos = cant_creditos;
+    public void setCantCreditos(int cantCreditos) {
+        this.cantCreditos = cantCreditos;
     }
 
-    public int getCod_carrera() {
-        return cod_carrera;
+    public int getCodCarrera() {
+        return codCarrera;
     }
 
-    public void setCod_carrera(int cod_carrera) {
-        this.cod_carrera = cod_carrera;
+    public void setCodCarrera(int codCarrera) {
+        this.codCarrera = codCarrera;
     }
 }

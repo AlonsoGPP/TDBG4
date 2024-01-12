@@ -1,20 +1,20 @@
 package TDB.MsControlAcademico.dtos;
 
 public class CursoDTO {
-    private String cod_curso;
+    private String codCurso;
     private String nombre;
     private int creditos;
     private int ciclo;
-    private int total_sesiones;
+    private int totalSesiones;
     private String descripcion;
-    private Integer id_plan_estudio;
+    private Integer idPlanEstudio;
 
-    public String getCod_curso() {
-        return cod_curso;
+    public String getCodCurso() {
+        return codCurso;
     }
 
-    public void setCod_curso(String cod_curso) {
-        this.cod_curso = cod_curso;
+    public void setCodCurso(String codCurso) {
+        this.codCurso = codCurso;
     }
 
     public String getNombre() {
@@ -41,12 +41,12 @@ public class CursoDTO {
         this.ciclo = ciclo;
     }
 
-    public int getTotal_sesiones() {
-        return total_sesiones;
+    public int getTotalSesiones() {
+        return totalSesiones;
     }
 
-    public void setTotal_sesiones(int total_sesiones) {
-        this.total_sesiones = total_sesiones;
+    public void setTotalSesiones(int totalSesiones) {
+        this.totalSesiones = totalSesiones;
     }
 
     public String getDescripcion() {
@@ -57,11 +57,11 @@ public class CursoDTO {
         this.descripcion = descripcion;
     }
 
-    public Integer getId_plan_estudio() {
-        return id_plan_estudio;
+    public Integer getIdPlanEstudio() {
+        return idPlanEstudio;
     }
 
-    public void setId_plan_estudio(Integer id_plan_estudio) {
-        this.id_plan_estudio = id_plan_estudio;
+    public void setIdPlanEstudio(Integer idPlanEstudio) {
+        this.idPlanEstudio = idPlanEstudio;
     }
 }

@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface EstudianteMapper {
 
-    EstudianteMapper mapper1 = Mappers.getMapper(EstudianteMapper.class);
+    EstudianteMapper mapper = Mappers.getMapper(EstudianteMapper.class);
     EstudianteResponse estudianteToEstudianteResponse(EstudianteModel estudianteModel);
 
     EstudianteModel estudianteRequestToEstudianteModel(EstudianteRequest estudianteRequest);

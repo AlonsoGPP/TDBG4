@@ -1,10 +1,8 @@
 package TDB.MsControlAcademico.services;
 
-import TDB.MsControlAcademico.dtos.CarrerasMapper;
 import TDB.MsControlAcademico.dtos.PlanEstudioDTO;
 import TDB.MsControlAcademico.dtos.PlanEstudioMapper;
 import TDB.MsControlAcademico.interfaces.PlanEstudioServiceInterface;
-import TDB.MsControlAcademico.model.CarreraModel;
 import TDB.MsControlAcademico.model.PlanEstudioModel;
 import TDB.MsControlAcademico.repository.PlanEstudioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,7 @@ public class PlanEstudioService implements PlanEstudioServiceInterface {
     @Override
     public PlanEstudioDTO updatePlanEstudio(PlanEstudioDTO planEstudioDTO) {
         PlanEstudioModel planEstudioModel = PlanEstudioMapper.mapper.mapper.PlanEstudioDTOTOPlanEstudio(planEstudioDTO);
-        if(planEstudioRepository.existsById(planEstudioDTO.getId_plan_estudio())){
+        if(planEstudioRepository.existsById(planEstudioDTO.getIdPlanEstudio())){
             return PlanEstudioMapper.mapper.PlanEstudioToPlanEstudiDTO(planEstudioRepository.save(planEstudioModel));
         }
         return null;

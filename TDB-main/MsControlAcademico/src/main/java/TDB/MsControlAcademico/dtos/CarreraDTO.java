@@ -1,16 +1,16 @@
 package TDB.MsControlAcademico.dtos;
 
 public class CarreraDTO {
-    private int cod_carrera;
+    private int codCarrera;
     private String nombre;
-    private int id_facultad;
+    private int idFacultad;
 
-    public int getCod_carrera() {
-        return cod_carrera;
+    public int getCodCarrera() {
+        return codCarrera;
     }
 
-    public void setCod_carrera(int cod_carrera) {
-        this.cod_carrera = cod_carrera;
+    public void setCodCarrera(int codCarrera) {
+        this.codCarrera = codCarrera;
     }
 
     public String getNombre() {
@@ -21,11 +21,11 @@ public class CarreraDTO {
         this.nombre = nombre;
     }
 
-    public int getId_facultad() {
-        return id_facultad;
+    public int getIdFacultad() {
+        return idFacultad;
     }
 
-    public void setId_facultad(int id_facultad) {
-        this.id_facultad = id_facultad;
+    public void setIdFacultad(int idFacultad) {
+        this.idFacultad = idFacultad;
     }
 }
