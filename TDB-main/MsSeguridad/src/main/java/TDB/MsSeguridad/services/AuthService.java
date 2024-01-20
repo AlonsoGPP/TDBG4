@@ -78,4 +78,16 @@ public UserResponse actualizarUsuario(UserRequest userRQ){
                 .from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault())
                         .toInstant());
     }
+
+
+    public boolean validarCredenciales(String usuario, String clave){
+        List<UsuarioModel> result = (List<UsuarioModel>) authRepository.findAll();
+        List<UsuarioModel> resultFilter = result.stream()
+        .filter(t -> t.getUsername().equals(usuario) && t.getPassword().equals(clave))
+        .collect(Collectors.toList());
+        if(null == resultFilter || resultFilter.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }

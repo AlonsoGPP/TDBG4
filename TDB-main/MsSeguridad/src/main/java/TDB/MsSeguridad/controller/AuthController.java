@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import TDB.MsSeguridad.dtos.UserRequest;
 import TDB.MsSeguridad.dtos.UserResponse;
+import TDB.MsSeguridad.jwt.JwtToken;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,10 @@ public class AuthController {
 
     @Autowired
     AuthService authService;
+
+    
+    @Autowired
+    private JwtToken jwtTokenCroos;
 
     @GetMapping("/users")
     public ResponseEntity<?> getAll() {
@@ -68,4 +74,24 @@ public class AuthController {
          }catch (Exception e){
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");}
       }
+
+
+      @PostMapping()
+      public ResponseEntity<?> post(@RequestBody UserRequest requestUsu) throws Exception{
+          try {
+              if (!authService.validarCredenciales(requestUsu.getUsername(), requestUsu.getPassword())) {
+                  return new ResponseEntity<String>("INVALID_CREDENTIALS", HttpStatus.UNAUTHORIZED);
+              }
+  
+              String token = jwtTokenCroos.generateToken(requestUsu);
+              UserResponse response = new UserResponse(token, requestUsu.get(), "1d");
+  
+              return ResponseEntity.ok(response);
+          } catch (Exception e) {
+              // Manejo de la excepción
+             //logger.error(MensajesParametrizados.MENSAJE_ERROR_AUTENTICACION, e.getMessage());
+              return new ResponseEntity<String>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
+          }
+      }
+
 }
