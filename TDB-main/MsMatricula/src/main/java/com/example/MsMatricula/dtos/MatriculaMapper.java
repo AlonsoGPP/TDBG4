@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface MatriculaMapper {
-    MatriculaMapper mapper = Mappers.getMapper(MatriculaMapper.class);
+    MatriculaMapper mapper1 = Mappers.getMapper(MatriculaMapper.class);
 
     MatriculaResponse matriculaModelToResponse(MatriculaModel matriculaModel);
 

@@ -20,16 +20,56 @@ public class MatriculaService {
 
     public List<MatriculaResponse> getAll(){
         List<MatriculaModel> docentes= (List<MatriculaModel>) iMatriculaRepository.findAll();
-        List<MatriculaResponse> docenteResponse=docentes.stream().map(docente-> MatriculaMapper.mapper.matriculaModelToResponse(docente)).collect(Collectors.toList());
+        List<MatriculaResponse> docenteResponse=docentes.stream().map(docente-> MatriculaMapper.mapper1.matriculaModelToResponse(docente)).collect(Collectors.toList());
         return docenteResponse;
     }
 
-    public MatriculaResponse createDocente(MatriculaRequest matriculaRequest){
-        MatriculaModel matriculaModel=MatriculaMapper.mapper.matriculaRequestToModel(matriculaRequest);
-        matriculaModel.setUpdateAt(getCurrentDate());
-        return MatriculaMapper.mapper.docenteModelToDocenteResponse(iMatriculaRepository.save(docenteModel));
+    public MatriculaResponse create(MatriculaRequest matriculaRequest){
+        MatriculaModel matriculaModel=MatriculaMapper.mapper1.matriculaRequestToModel(matriculaRequest);
+        matriculaModel.setUpdatedAt(getCurrentDate());
+        return MatriculaMapper.mapper1.matriculaModelToResponse(iMatriculaRepository.save(matriculaModel));
 
     }
+    public MatriculaResponse update(MatriculaRequest maRq)  {
+        MatriculaModel ma=MatriculaMapper.mapper1.matriculaRequestToModel(maRq);
+
+        MatriculaModel tmpObj=iMatriculaRepository.findById(ma.getIdMatricula()).orElse(null);
+        if(tmpObj!=null){
+            if(ma.getCodEstudiante()!=null){
+                tmpObj.setCodEstudiante(ma.getCodEstudiante());
+            }
+            if(ma.getIdPeriodo()!=null){
+                tmpObj.setIdPeriodo(ma.getIdPeriodo());
+            }
+            if(ma.getFechaMatricula()!=null){
+                tmpObj.setFechaMatricula(ma.getFechaMatricula());
+            }
+
+            tmpObj.setUpdatedAt(getCurrentDate());
+
+            return MatriculaMapper.mapper1.matriculaModelToResponse(iMatriculaRepository.save(tmpObj));
+        }
+
+
+        return null;
+    }
+
+    public boolean deleteById(int id){
+        try {
+            MatriculaModel maMo=iMatriculaRepository.findById(id).orElseThrow();//
+            iMatriculaRepository.delete(maMo);
+            return true;
+        }catch (Exception e ){
+            return false;
+        }
+
+    }
+    public MatriculaResponse getById(int id){
+
+        MatriculaModel maMo=iMatriculaRepository.findById(id).orElse(null);//
+        return MatriculaMapper.mapper1.matriculaModelToResponse(maMo);
+    }
+
     public Date getCurrentDate(){
         return  java.util.Date
                 .from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault())
