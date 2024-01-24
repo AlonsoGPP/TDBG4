@@ -1,11 +1,16 @@
 package com.Msdocencia.MsDocencia.model;
 
-import jakarta.persistence.*;
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +33,6 @@ public class DocenteDictaCursoModel {
 
     @Column(name="updated_at")
     private Date updatedAt;
+
+    
 }
